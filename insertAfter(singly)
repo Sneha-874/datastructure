@@ -6,7 +6,7 @@ struct node
     int data;
     struct node* next;
 };
-void insertAtEnd(struct node *ptr , int num , int insert_num){
+void insertAfter(struct node *ptr , int num , int insert_num){
     
    struct node *new_node;
    new_node = (struct node*)malloc(sizeof(struct node));
@@ -51,7 +51,7 @@ int main()
     printf("After which data value? :- ");
     scanf("%d" , &num);
    printf("\nLinked list after insertion:-\n");
-   insertAtEnd(start , num , num1);
+   insertAfter(start , num , num1);
    print(ptr);
     return 0;
 }
