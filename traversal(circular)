@@ -1,0 +1,48 @@
+//circular linked list traversal
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node* next;
+};
+void traverse(struct node *ptr , struct node *start){
+    
+   do{
+    printf("%d\t" , ptr->data);
+    ptr=ptr->next;
+   }while(ptr!=start);
+    
+}
+// void print(struct node*ptr){
+//     while(ptr!=NULL){
+//         printf("Element:- %d\t" , ptr->data);
+//         ptr = ptr->next;
+//     }
+// }
+int main()
+{
+    int num;
+    struct node *ptr;
+    struct node *temp;
+    struct node *start;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    start= (struct node*)malloc(sizeof(struct node));
+    second = (struct node*)malloc(sizeof(struct node));
+    third = (struct node*)malloc(sizeof(struct node));
+    fourth = (struct node*)malloc(sizeof(struct node));
+   start->data=7;
+   start->next=second;
+    second->data = 5;
+    second->next = third;
+    third->data = 12;
+    third->next = fourth;
+    fourth->data=56;
+    fourth->next = start;
+   ptr = start;
+   
+   traverse(ptr,start);
+    return 0;
+}
