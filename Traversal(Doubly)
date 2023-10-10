@@ -1,0 +1,42 @@
+//traversal of doubly linked list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+void traverse(struct node *ptr){
+    while(ptr != NULL){
+    printf("%d\t" , ptr->data);
+    ptr=ptr->next;
+    }
+}
+int main()
+{
+    struct node *ptr;
+    struct node *start;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    start = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+    start->data=7;
+    start->prev=NULL;
+    start->next=second;
+    second->prev=start;
+    second->data=24;
+    second->next=third;
+    third->prev=second;
+    third->data=14;
+    third->next=fourth;
+    fourth->prev=third;
+    fourth->data=56;
+    fourth->next=NULL;
+    ptr=start;
+    traverse(ptr);
+
+    return 0;
+}
