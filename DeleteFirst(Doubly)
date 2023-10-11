@@ -13,7 +13,7 @@ void print(struct node *ptr , struct node *start){
     ptr=ptr->next;
     }
 }
-void InsertAfter(struct node *start , struct node *ptr ){
+void DeleteFirst(struct node *start , struct node *ptr ){
     ptr=start;
     start = start->next;
     start->prev=NULL;
@@ -51,7 +51,7 @@ int main()
     print(ptr , start);
     
     printf("\nLinked list after deletion:-\n");
-    InsertAfter(start , ptr );
+    DeleteFirst(start , ptr );
 
     return 0;
 }
