@@ -1,0 +1,65 @@
+//Deleting a node after a particular data value in doubly linked list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+void print(struct node *ptr , struct node *start){
+    ptr=start;
+    while(ptr != NULL){
+    printf("%d\t" , ptr->data);
+    ptr=ptr->next;
+    }
+}
+void DeleteAfter(struct node *start , struct node *ptr , int num){
+    ptr=start;
+    struct node *temp;
+
+    while(ptr->data!=num){
+        ptr=ptr->next;
+    }
+    temp = ptr->next;
+    ptr->next = temp->next;
+    temp->next->prev = ptr;
+    free(temp);
+    
+    print(ptr,start);
+}
+int main()
+{
+    int num,val;
+    struct node *ptr;
+    // struct node *new_node;
+    struct node *start;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    start = (struct node *)malloc(sizeof(struct node));
+    // new_node = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+    start->data=7;
+    start->prev=NULL;
+    start->next=second;
+    second->prev=start;
+    second->data=24;
+    second->next=third;
+    third->prev=second;
+    third->data=14;
+    third->next=fourth;
+    fourth->prev=third;
+    fourth->data=56;
+    fourth->next=NULL;
+    ptr=start;
+    printf("Linked list before deletion:-\n");
+    print(ptr , start);
+    printf("\nEnter the number after which you want to delete:- ");
+    scanf("%d" , &num);
+    printf("\nLinked list after deletion:-\n");
+    DeleteAfter(start , ptr , num );
+
+    return 0;
+}
