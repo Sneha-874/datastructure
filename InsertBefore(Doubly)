@@ -1,0 +1,66 @@
+//Insertion before a particular node value in doubly linked list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+void print(struct node *ptr , struct node *start){
+    ptr=start;
+    while(ptr != NULL){
+    printf("%d\t" , ptr->data);
+    ptr=ptr->next;
+    }
+}
+void InsertAfter(struct node *start , struct node *new_node , struct node *ptr , int num){
+    ptr=start;
+    while(ptr->data!=num){
+        ptr=ptr->next;
+    }
+    new_node->prev=ptr->prev;
+    new_node->next=ptr;
+    ptr->prev->next=new_node;
+    ptr->prev=new_node;
+
+    print(ptr,start);
+}
+int main()
+{
+    int num,val;
+    struct node *ptr;
+    struct node *new_node;
+    struct node *start;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    start = (struct node *)malloc(sizeof(struct node));
+    new_node = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+    start->data=7;
+    start->prev=NULL;
+    start->next=second;
+    second->prev=start;
+    second->data=24;
+    second->next=third;
+    third->prev=second;
+    third->data=14;
+    third->next=fourth;
+    fourth->prev=third;
+    fourth->data=56;
+    fourth->next=NULL;
+    ptr=start;
+    printf("Linked list before insertion:-\n");
+    print(ptr , start);
+    printf("\nEnter the data value before which you want the number to be inserted:- ");
+    scanf("%d" , &val);
+    printf("\nEnter number to be inserted :- ");
+    scanf("%d" , &num);
+    new_node->data=num;
+    printf("\nLinked list after insertion:-\n");
+    InsertAfter(start , new_node , ptr , val);
+
+    return 0;
+}
