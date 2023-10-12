@@ -1,0 +1,72 @@
+//Deleting the first node in circular doubly linked list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+void print(struct node *ptr , struct node *start){
+    ptr=start;
+    while(ptr->next != start){
+    printf("%d\t" , ptr->data);
+    ptr=ptr->next;
+    }
+    printf("%d" , ptr->data);
+}
+void deleteFirst(struct node **start) {
+    if (*start == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    struct node *temp = *start;
+    if (temp->next == temp) { // If only one node in the list
+        free(temp);
+        *start = NULL;
+    } else {
+        temp->prev->next = temp->next;
+        temp->next->prev = temp->prev;
+        *start = temp->next; // Update the start pointer
+        free(temp);
+    }
+}
+
+
+int main()
+{
+    // int num,val;
+    struct node *ptr;
+    // struct node *new_node;
+    struct node *start;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    start = (struct node *)malloc(sizeof(struct node));
+    // new_node = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+    start->data=7;
+    start->prev=fourth;
+    start->next=second;
+    second->prev=start;
+    second->data=24;
+    second->next=third;
+    third->prev=second;
+    third->data=14;
+    third->next=fourth;
+    fourth->prev=third;
+    fourth->data=56;
+    fourth->next=start;
+    ptr=start;
+    printf("Linked list before deletion:-\n");
+    print(ptr,start);
+    // printf("\nEnter number to be inserted at last:- ");
+    // scanf("%d" , &num);
+    // new_node->data=num;
+    deleteFirst(&start);
+    printf("\nLinked List after deletion:-\n");
+    print(ptr,start);
+    return 0;
+}
