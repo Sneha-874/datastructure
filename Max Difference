@@ -1,0 +1,40 @@
+//maximum difference between two elements
+#include <stdio.h>
+
+int findMaxDifference(int size, int arr[size]) {
+    if (size < 2) {
+        return -1;
+    }
+
+    int maxDifference = arr[1] - arr[0];
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            int currentDifference = arr[j] - arr[i];
+            if (currentDifference > maxDifference) {
+                maxDifference = currentDifference;
+            }
+        }
+    }
+
+    return maxDifference;
+}
+
+int main() {
+    
+    int size = 6;
+    int myArray[] = {9, 2, 3, 5, 7, 1};
+
+    
+    int maxDifference = findMaxDifference(size, myArray);
+
+    if (maxDifference != -1) {
+        
+        printf("Maximum Difference: %d\n", maxDifference);
+    } else {
+        
+        printf("Error: Not enough elements to calculate the difference.\n");
+    }
+
+    return 0;
+}
