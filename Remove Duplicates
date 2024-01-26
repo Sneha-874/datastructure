@@ -1,0 +1,47 @@
+//Removing the duplicate elements from the array given by user
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *arr;
+    int n;
+    
+    // Input size of the array
+    printf("Enter the size of array: ");
+    scanf("%d", &n);
+
+    // Dynamically allocate memory for the array
+    arr = (int *)malloc(n * sizeof(int));
+
+    // Input elements of the array
+    printf("Enter the elements of array:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Remove duplicates
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n;) {
+            if (arr[j] == arr[i]) {
+                // Remove the duplicate by shifting elements to the left
+                for (int k = j; k < n - 1; k++) {
+                    arr[k] = arr[k + 1];
+                }
+                n--; // Decrease the size of the array
+            } else {
+                j++;
+            }
+        }
+    }
+
+    
+    printf("Array after removing duplicates: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    
+    free(arr);
+
+    return 0;
+}
