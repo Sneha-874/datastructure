@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <string.h>
+
+void insertChar(char *str, char ch, int position) {
+    int length = strlen(str);
+
+    // Shift characters to the right to make space for the new character
+    for (int i = length; i >= position; --i) {
+        str[i + 1] = str[i];
+    }
+
+    // Insert the new character
+    str[position] = ch;
+}
+
+int main() {
+    char str[50];
+    char characterToInsert;
+    int pos;
+
+    printf("Enter the string: ");
+    
+    // Read the string until Enter is pressed or the buffer is full
+    fgets(str, sizeof(str), stdin);
+
+    printf("Enter the character to insert: ");
+    scanf(" %c", &characterToInsert);
+
+    printf("Enter position to insert: ");
+    scanf("%d", &pos);
+
+    // Insert the character at the specified position
+    insertChar(str, characterToInsert, pos - 1);
+
+    printf("Modified string: %s\n", str);
+
+    return 0;
+}
