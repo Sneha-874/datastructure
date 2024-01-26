@@ -1,0 +1,80 @@
+#include <stdio.h>
+
+void selectionSort(int rows, int cols, int arr[rows][cols]) {
+    for (int i = 0; i < rows * cols - 1; ++i) {
+        for (int j = i + 1; j < rows * cols; ++j) {
+            // Convert the 2D indices to 1D indices
+            int row_i = i / cols;
+            int col_i = i % cols;
+            int row_j = j / cols;
+            int col_j = j % cols;
+
+            if (arr[row_i][col_i] > arr[row_j][col_j]) {
+                // Swap elements if they are in the wrong order
+                int temp = arr[row_i][col_i];
+                arr[row_i][col_i] = arr[row_j][col_j];
+                arr[row_j][col_j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+
+    int rows , cols;
+    printf("Enter the number of rows and columns:-\n");
+    scanf("%d%d" , &rows , &cols);
+
+    int myArray[rows][cols];
+    for(int i=0 ; i<rows ; i++){
+        for(int j=0 ; j<cols ; j++){
+            printf("Arr[%d][%d]:- " ,i,j );
+            scanf("%d" , &myArray[i][j]);
+        }
+    }
+    
+    // Display the original array
+    printf("Original 2D array:\n");
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            printf("%d\t", myArray[i][j]);
+        }
+        printf("\n");
+    }
+
+    // Sort the entire 2D array using selection sort
+    selectionSort(rows, cols, myArray);
+
+    // Display the sorted array
+    printf("\nSorted 2D array:\n");
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            printf("%d\t", myArray[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+Output:
+Enter the number of rows and columns:-
+3 3
+Arr[0][0]:- 1
+Arr[0][1]:- 5
+Arr[0][2]:- 3
+Arr[1][0]:- 9
+Arr[1][1]:- 4
+Arr[1][2]:- 2
+Arr[2][0]:- 8
+Arr[2][1]:- 0
+Arr[2][2]:- 7
+Original 2D array:
+1       5       3
+9       4       2
+8       0       7
+
+Sorted 2D array:
+0       1       2
+3       4       5
+7       8       9
