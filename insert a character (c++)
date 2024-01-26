@@ -1,0 +1,21 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string str ;
+    cout<<"Enter the string:- ";
+    getline(cin>>ws , str);
+    char characterToInsert;
+    cout<<"Enter the character to insert:- ";
+    cin>>characterToInsert;
+
+   
+    int pos;
+    cout<<"Enter the position to insert the character: ";
+    cin>>pos;
+    str.insert(pos, 1, characterToInsert);
+
+    cout << "Modified string: " << str << endl;
+
+    return 0;
+}
