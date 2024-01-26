@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+void findUnion(int arr1[], int size1, int arr2[], int size2);
+void findIntersection(int arr1[], int size1, int arr2[], int size2);
+
+int main() {
+    int size1, size2;
+
+    // Input size of the first array
+    printf("Enter the size of the first array: ");
+    scanf("%d", &size1);
+
+    int arr1[size1];
+
+    // Input elements of the first array
+    printf("Enter the elements of the first array:\n");
+    for (int i = 0; i < size1; i++) {
+        scanf("%d", &arr1[i]);
+    }
+
+    // Input size of the second array
+    printf("Enter the size of the second array: ");
+    scanf("%d", &size2);
+
+    int arr2[size2];
+
+    // Input elements of the second array
+    printf("Enter the elements of the second array:\n");
+    for (int i = 0; i < size2; i++) {
+        scanf("%d", &arr2[i]);
+    }
+
+    // Find and print the union of the arrays
+    printf("Union of the arrays: ");
+    findUnion(arr1, size1, arr2, size2);
+
+    // Find and print the intersection of the arrays
+    printf("\nIntersection of the arrays: ");
+    findIntersection(arr1, size1, arr2, size2);
+
+    return 0;
+}
+
+void findUnion(int arr1[], int size1, int arr2[], int size2) {
+    int i = 0, j = 0;
+
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j]) {
+            printf("%d ", arr1[i++]);
+        } else if (arr1[i] > arr2[j]) {
+            printf("%d ", arr2[j++]);
+        } else {
+            // If elements are equal, print one of them and move both indices
+            printf("%d ", arr1[i++]);
+            j++;
+        }
+    }
+
+    // Print remaining elements of the arrays
+    while (i < size1) {
+        printf("%d ", arr1[i++]);
+    }
+
+    while (j < size2) {
+        printf("%d ", arr2[j++]);
+    }
+}
+
+void findIntersection(int arr1[], int size1, int arr2[], int size2) {
+    int i = 0, j = 0;
+
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j]) {
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            j++;
+        } else {
+            // If elements are equal, print one of them and move both indices
+            printf("%d ", arr1[i++]);
+            j++;
+        }
+    }
+}
