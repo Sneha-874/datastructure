@@ -1,0 +1,52 @@
+//Program to check whether the array conatins a duplicate number or not
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+    int *arr;
+    int n;
+    int flag = 0;
+    printf("Enter the size of array:- ");
+    scanf("%d" , &n);
+    arr=(int *)malloc(n*sizeof(int));
+    printf("Enter the elements of array:-\n");
+    for(int i=0 ; i<n ; i++){
+        scanf("%d" , &arr[i]);
+    }
+    for(int i=0 ; i<n ; i++){
+        for(int j=i+1 ; j<n ; j++){
+            if(arr[j]==arr[i]){
+                flag = 1;
+                goto end;
+            }
+        }
+    }
+    end:
+    if(flag==0){
+        printf("There is no duplicate number.");
+    }
+    else{
+        printf("The array contains a duplicate number.");
+    }
+
+    return 0;
+}
+Output:
+Enter the size of array:- 5
+Enter the elements of array:-
+1
+2
+3
+3
+6
+The array contains a duplicate number.
+PS D:\c program\Data Structure> cd "d:\c program\Data Structure\" ; if ($?) { gcc linklist.c -o linklist } ; if ($?) { .\linklist }
+Enter the size of array:- 5
+Enter the elements of array:-
+1
+2
+3
+6
+5
+There is no duplicate number.
+PS D:\c program\Data Structure>
