@@ -1,0 +1,56 @@
+//spliting the array into two parts and adding the first part(including splitIndex location) at last of array
+#include <stdio.h>
+
+void rotateArray(int arr[], int size, int splitIndex) {
+    if (splitIndex < 0 || splitIndex >= size) {
+        printf("Invalid split index.\n");
+        return;
+    }
+
+    // Create a temporary array to store the first part
+    int temp[size];
+
+    // Copy the first part to the temporary array
+    for (int i = 0; i <= splitIndex; i++) {
+        temp[i] = arr[i];
+    }
+
+    // Shift the remaining elements to the beginning of the array
+    for (int i = 0; i < size - splitIndex - 1; i++) {
+        arr[i] = arr[i + splitIndex + 1];
+    }
+
+    // Insert the elements from the temporary array at the end
+    for (int i = 0; i <= splitIndex; i++) {
+        arr[size - splitIndex - 1 + i] = temp[i];
+    }
+}
+
+int main() {
+    int size;
+    int splitIndex;
+
+    printf("Enter the size of array: ");
+    scanf("%d", &size);
+
+    int arr[size];
+
+    printf("Enter the array elements:\n");
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter the split index: ");
+    scanf("%d", &splitIndex);
+
+    // Perform array rotation
+    rotateArray(arr, size, splitIndex);
+
+    // Print the rotated array
+    printf("Rotated Array: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
