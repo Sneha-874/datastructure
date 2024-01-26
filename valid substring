@@ -1,0 +1,45 @@
+//to check whether the given substring is valid or not (in c++)
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool isValidSubstring(const string& input, const string& substring) {
+    int inputIndex = 0;
+
+    for (int i = 0; i < substring.length(); ++i) {
+        char currentChar = substring[i];
+
+        // Search for the current character in the remaining part of the input
+        int foundIndex = input.find(currentChar, inputIndex);
+
+        // If the character is not found or found out of order, substring is not valid
+        if (foundIndex == string::npos || foundIndex < inputIndex) {
+            return false;
+        }
+
+        // Move the input index to the next position for the next character search
+        inputIndex = foundIndex + 1;
+    }
+
+    return true; 
+}
+
+int main() {
+    string input;
+
+    cout << "Enter a string: ";
+    getline(cin, input);
+
+    cout << "Enter a substring to check: ";
+    string substring;
+    cin >> substring;
+
+    if (isValidSubstring(input, substring)) {
+        cout << "The substring is valid." << endl;
+    } else {
+        cout << "The substring is not valid." << endl;
+    }
+
+    return 0;
+}
