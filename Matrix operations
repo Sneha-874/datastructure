@@ -1,0 +1,129 @@
+//program to transpose , add , multiply and subtract two 3*3 matrices
+#include<stdio.h>
+void display(int arr[3][3]){
+    for(int i=0 ; i<3 ; i++){
+        for(int j=0 ; j<3 ; j++){
+            printf("%d\t" , arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    int n;
+    printf("Press 1 for addition , 2 for subtraction, 3 for multiplication and 4 for transpose of two matrices:-\n");
+    scanf("%d" , &n);
+    int arr1[3][3] , arr2[3][3];
+    printf("Enter the elements of first matrix:-\n");
+    for(int i=0 ; i<3 ; i++){
+        for(int j=0 ; j<3 ; j++){
+            printf("Arr1[%d][%d] = " , i , j);
+            scanf("%d" , &arr1[i][j]);
+        }
+    }
+    printf("Enter the elements of second matrix:-\n");
+    for(int i=0 ; i<3 ; i++){
+        for(int j=0 ; j<3 ; j++){
+            printf("Arr2[%d][%d] = " , i , j);
+            scanf("%d" , &arr2[i][j]);
+        }
+    }
+    printf("First matrix:-\n");
+    display(arr1);
+    printf("Second matrix:-\n");
+    display(arr2);
+    switch(n){
+        case 1:
+        {
+            int add[3][3];
+        printf("The addition of two matrices will be:-\n");
+        for(int i=0 ; i<3 ; i++){
+            for(int j=0 ; j<3 ; j++){
+                add[i][j] = arr1[i][j]+arr2[i][j];
+            }
+        }
+        display(add);
+        }
+        break;
+        case 2:
+        {
+            int sub[3][3];
+        printf("The subtraction of two matrices will be:-\n");
+        for(int i=0 ; i<3 ; i++){
+            for(int j=0 ; j<3 ; j++){
+                sub[i][j] = arr1[i][j]+arr2[i][j];
+            }
+        }
+        display(sub);
+        }
+        break;
+        case 3:
+        {
+            int mul[3][3];
+            for(int i=0 ; i<3 ; i++){
+                for(int j=0 ; j<3 ; j++){
+                    mul[i][j] = 0;
+                    for(int k=0 ; k<3 ; k++){
+                        mul[i][j] = mul[i][j] + arr1[i][k]*arr2[k][j];
+                    }
+                }
+            }
+            display(mul);
+        }
+        break;
+        case 4:
+        {
+            int tp1[3][3] , tp2[3][3] ;
+            for(int i=0 ; i<3 ; i++){
+                for(int j=0 ; j<3 ; j++){
+                    tp1[j][i] = arr1[i][j];
+                    tp2[j][i] = arr2[i][j];
+
+                }
+            }
+            printf("Transpose of first matrix is :- \n");
+            display(tp1);
+            printf("Transpose of second matrix is :- \n");
+            display(tp2);
+        }
+        break;
+        default:
+        printf("Invalid input!!!");
+    }
+    return 0;
+}
+Output:-
+Press 1 for addition , 2 for subtraction, 3 for multiplication and 4 for transpose of two matrices:-
+1
+Enter the elements of first matrix:-
+Arr1[0][0] = 1
+Arr1[0][1] = 2
+Arr1[0][2] = 3
+Arr1[1][0] = 4
+Arr1[1][1] = 5
+Arr1[1][2] = 6
+Arr1[2][0] = 7
+Arr1[2][1] = 8
+Arr1[2][2] = 9
+Enter the elements of second matrix:-Arr2[0][0] = 1
+Arr2[0][1] = 2
+Arr2[0][2] = 3
+Arr2[1][0] = 4
+Arr2[1][1] = 5
+Arr2[1][2] = 6
+Arr2[2][0] = 7
+Arr2[2][1] = 8
+Arr2[2][2] = 9
+First matrix:-
+1       2       3
+4       5       6
+7       8       9
+Second matrix:-
+1       2       3
+4       5       6
+7       8       9
+The addition of two matrices will be:-
+2       4       6
+8       10      12
+14      16      18
+PS D:\c program\Data Structure>
