@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <sstream>
+#include <vector>
+#include <iterator>  // Add this for istream_iterator
+
+using namespace std;
+
+int main() {
+    string str1;
+    string str2;
+
+    cout << "Enter the first string: ";
+    getline(cin >> ws, str1);
+
+    cout << "Enter the second string: ";
+    getline(cin >> ws, str2);
+
+    // Concatenate using the + operator
+    string result = str1 + " " + str2; // Adding space between the two strings
+
+    // Tokenize the concatenated string into words
+    istringstream iss(result);
+    vector<string> words(istream_iterator<string>{iss},
+                         istream_iterator<string>());
+
+    // Sort the words
+    sort(words.begin(), words.end());
+
+    // Create a new string by joining the sorted words
+    string sortedResult = "";
+    for (const auto& word : words) {
+        sortedResult += word + " ";
+    }
+
+    cout << "Concatenation and sorting (words): " << sortedResult << endl;
+
+    return 0;
+}
