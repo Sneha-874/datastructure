@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+int findSumOfNumbers(const string& str) {
+    int sum = 0;
+    int currentNumber = 0;
+    bool inNumber = false;
+
+    for (int i = 0; i < str.length(); ++i) {
+        char ch = str[i];
+
+        if (isdigit(ch)) {
+            currentNumber = currentNumber * 10 + (ch - '0');
+            inNumber = true;
+        } else {
+            if (inNumber) {
+                sum += currentNumber;
+                currentNumber = 0;
+                inNumber = false;
+            }
+        }
+    }
+
+    // Add the last number if the string ends with a number
+    if (inNumber) {
+        sum += currentNumber;
+    }
+
+    return sum;
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string with numbers: ";
+    getline(cin, inputString);
+
+    int sum = findSumOfNumbers(inputString);
+
+    cout << "Sum of numbers in the string: " << sum << endl;
+
+    return 0;
+}
