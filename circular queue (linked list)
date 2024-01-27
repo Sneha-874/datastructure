@@ -1,0 +1,113 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct CircularQueue {
+    int size;
+    struct Node* front;
+    struct Node* rear;
+};
+
+struct CircularQueue* createCircularQueue(int size) {
+    struct CircularQueue* q = (struct CircularQueue*)malloc(sizeof(struct CircularQueue));
+    q->size = size;
+    q->front = q->rear = NULL;
+    return q;
+}
+
+int isEmpty(struct CircularQueue* q) {
+    return (q->front == NULL);
+}
+
+int isFull(struct CircularQueue* q) {
+    return (q->front == q->rear->next);
+}
+
+void enqueue(struct CircularQueue* q, int val) {
+    if (isFull(q)) {
+        printf("The queue is full\n");
+    }
+    else {
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = val;
+        newNode->next = NULL;
+
+        if (isEmpty(q)) {
+            q->front = q->rear = newNode;
+            q->rear->next = q->front;
+        }
+        else {
+            q->rear->next = newNode;
+            q->rear = newNode;
+            q->rear->next = q->front; // Circular linking
+        }
+    }
+}
+
+int dequeue(struct CircularQueue* q) {
+    int a = -1;
+    if (isEmpty(q)) {
+        printf("The queue is empty\n");
+    }
+    else {
+        struct Node* temp = q->front;
+
+        if (q->front == q->rear) {
+            q->front = q->rear = NULL;
+        }
+        else {
+            q->front = q->front->next;
+            q->rear->next = q->front; // Circular unlinking
+        }
+
+        a = temp->data;
+        free(temp);
+    }
+    return a;
+}
+
+void displayQueue(struct CircularQueue* q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    struct Node* current = q->front;
+    do {
+        printf("%d ", current->data);
+        current = current->next;
+    } while (current != q->front);
+    printf("\n");
+}
+
+int main() {
+    struct CircularQueue* q = createCircularQueue(4);
+
+    // Enqueue few elements
+    enqueue(q, 12);
+    enqueue(q, 15);
+    enqueue(q, 1);
+
+    printf("Dequeuing element %d\n", dequeue(q));
+    printf("Dequeuing element %d\n", dequeue(q));
+    printf("Dequeuing element %d\n", dequeue(q));
+
+    enqueue(q, 45);
+    enqueue(q, 45);
+    enqueue(q, 45);
+
+    displayQueue(q);
+
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+    }
+    if (isFull(q)) {
+        printf("Queue is full\n");
+    }
+
+    return 0;
+}
