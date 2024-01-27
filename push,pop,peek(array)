@@ -1,0 +1,74 @@
+
+//implementing Push , pop and peek operation (array)
+#include<stdio.h>
+#include<stdlib.h>
+struct stack{
+    int size;
+    int top;
+    int *arr;
+};
+int isEmpty(struct stack *ptr){
+    if(ptr->top == -1)
+    return 1;
+    else
+    return 0;
+}
+int isFull(struct stack *ptr){
+    if(ptr->top == ptr->size-1)
+    return 1;
+    else
+    return 0;
+}
+void push(int value , struct stack *ptr){
+    if(isFull(ptr)){
+        printf("Stack Overflow!!");
+    }
+    else{
+        ptr->top++;
+        ptr->arr[ptr->top] = value;
+        printf("%d has been added \n" , value);
+
+    }
+}
+void pop(struct stack *ptr ){
+    if(isEmpty(ptr)){
+        printf("Stack UnderFlow!!");
+
+    }
+    else{
+        int val = ptr->arr[ptr->top];
+        ptr->top--;
+        printf("%d has been popped\n" , val);
+    }
+}
+void peek(struct stack *ptr){
+    if(isEmpty(ptr)){
+        printf("The stack is empty!!!");
+    }
+    else{
+        printf("The topmost element is %d\n" , ptr->arr[ptr->top]);
+    }
+}
+int main()
+{
+    struct stack *sp = (struct stack*)malloc(sizeof(struct stack));
+    sp->size = 4;
+    sp->top = -1;
+    sp->arr = (int *)malloc(sp->size*sizeof(int));
+    push(23 , sp);
+    push(32 , sp);
+    push(2 , sp);
+    push(42 , sp);
+    peek(sp);
+    pop(sp);
+    pop(sp);
+    return 0;
+}
+Output:
+23 has been added 
+32 has been added 
+2 has been added 
+42 has been added 
+The topmost element is 42
+42 has been popped
+2 has been popped
