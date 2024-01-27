@@ -1,0 +1,30 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+void reverseEachWord(string& str) {
+    int start = 0;
+    int end = str.find(' ');
+
+    while (end != -1) {
+        reverse(str.begin() + start, str.begin() + end);
+        start = end + 1;
+        end = str.find(' ', start);
+    }
+
+    // Reverse the last word (or the only word if there's no space)
+    reverse(str.begin() + start, str.end());
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    reverseEachWord(inputString);
+
+    cout << "String with each word reversed: " << inputString << endl;
+
+    return 0;
+}
