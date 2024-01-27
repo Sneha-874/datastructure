@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Queue {
+    struct Node* front;
+    struct Node* rear;
+};
+
+struct Node* createNode(int val) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = val;
+    newNode->next = NULL;
+    return newNode;
+}
+
+int isEmpty(struct Queue* q) {
+    return (q->front == NULL);
+}
+
+void enqueue(struct Queue* q, int val) {
+    struct Node* newNode = createNode(val);
+    if (isEmpty(q)) {
+        q->front = q->rear = newNode;
+    } else {
+        q->rear->next = newNode;
+        q->rear = newNode;
+    }
+}
+
+int dequeue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("The queue is empty\n");
+        return -1;
+    } else {
+        struct Node* temp = q->front;
+        int val = temp->data;
+        q->front = temp->next;
+        free(temp);
+        return val;
+    }
+}
+
+void displayQueue(struct Queue* q) {
+    struct Node* current = q->front;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    struct Queue q;
+    q.front = q.rear = NULL;
+
+    enqueue(&q, 12);
+    enqueue(&q, 24);
+    enqueue(&q, 32);
+    enqueue(&q, 25);
+
+    printf("Queue elements before dequeue: ");
+    displayQueue(&q);
+
+    int dequeuedValue = dequeue(&q);
+    if (dequeuedValue != -1) {
+        printf("\nDequeued element: %d\n", dequeuedValue);
+    }
+
+    printf("Queue elements after dequeue: ");
+    displayQueue(&q);
+
+    return 0;
+}
