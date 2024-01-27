@@ -1,0 +1,74 @@
+//merging two sorted linked lists and the result will be sorted list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void create(struct node **ptr, int num) {
+    struct node *new_node;
+    new_node = (struct node*)malloc(sizeof(struct node));
+    new_node->data = num;
+    new_node->next = NULL;
+
+    if (*ptr == NULL) {
+        *ptr = new_node;
+    } else {
+        struct node *temp = *ptr;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+    }
+}
+struct node *merge(struct node *ptr1 , struct node *ptr2  ) {
+    if(ptr1 == NULL)
+    return ptr2;
+    if(ptr2 == NULL)
+    return ptr1;
+    struct node *ptr = NULL;
+     if (ptr1->data <= ptr2->data) {
+        ptr = ptr1;
+        ptr->next = merge(ptr1->next, ptr2);
+    } else {
+        ptr = ptr2;
+        ptr->next = merge(ptr1, ptr2->next);
+    }
+    return ptr;
+}
+
+void display(struct node *ptr){
+    while(ptr!=NULL){
+        printf("%d\t" , ptr->data);
+        ptr = ptr->next;
+    }
+}
+int main()
+{
+    struct node *start = NULL; 
+    create(&start, 1);
+    create(&start, 3);
+    create(&start, 5);
+    create(&start, 10);
+    struct node *start2 = NULL;
+    create(&start2, 2);
+    create(&start2, 6);
+    create(&start2, 9);
+    
+    printf("First linked list:-\n");
+    display(start);
+    printf("\nSecond linked list:-\n");
+    display(start2);
+    
+    printf("\nLinked list after merge:-\n");
+    struct node *mergedList = merge(start , start2);
+    display(mergedList);
+        return 0;
+}
+Output:-
+First linked list:-
+1       3       5       10
+Second linked list:-
+2       6       9
+Linked list after merge:-
+1       2       3       5       6       9     10
