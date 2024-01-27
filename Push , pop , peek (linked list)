@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Stack {
+    struct Node* top;
+};
+
+// Function to check if the stack is empty
+int isEmpty(struct Stack *s) {
+    return (s->top == NULL);
+}
+
+// Function to push a value onto the stack
+void push(struct Stack *s, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        printf("Memory allocation failed. Stack Overflow!\n");
+        return;
+    }
+
+    newNode->data = value;
+    newNode->next = s->top;
+    s->top = newNode;
+    printf("%d has been added\n", value);
+}
+
+// Function to pop a value from the stack
+void pop(struct Stack *s) {
+    if (isEmpty(s)) {
+        printf("Stack Underflow!\n");
+        return;
+    }
+
+    struct Node* temp = s->top;
+    int val = temp->data;
+    s->top = temp->next;
+    free(temp);
+    printf("%d has been popped\n", val);
+}
+
+// Function to peek at the topmost element of the stack
+void peek(struct Stack *s) {
+    if (isEmpty(s)) {
+        printf("The stack is empty!\n");
+        return;
+    }
+
+    printf("The topmost element is %d\n", s->top->data);
+}
+
+int main() {
+    struct Stack *stack = (struct Stack*)malloc(sizeof(struct Stack));
+    stack->top = NULL;
+
+    push(stack, 23);
+    push(stack, 32);
+    push(stack, 2);
+    push(stack, 42);
+    peek(stack);
+    pop(stack);
+    pop(stack);
+
+    return 0;
+}
