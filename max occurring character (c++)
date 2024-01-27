@@ -1,0 +1,47 @@
+#include <iostream>
+#include <climits>
+
+using namespace std;
+
+char getMaxOccurringChar(const string& str) {
+    const int CHAR_COUNT = 256; 
+
+    int frequency[CHAR_COUNT] = {0};
+
+   
+      for (int i = 0; i < str.length(); ++i) {
+        char ch = str[i];
+        if (ch != ' ') {
+            frequency[ch]++;
+        }
+    }
+
+    char maxChar = '\0';
+    int maxCount = INT_MIN;
+
+    // Find the non-space character with the maximum frequency
+    for (int i = 0; i < CHAR_COUNT; ++i) {
+        if (frequency[i] > maxCount) {
+            maxCount = frequency[i];
+            maxChar = static_cast<char>(i);
+        }
+    }
+
+    return maxChar;
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    char maxChar = getMaxOccurringChar(inputString);
+
+    if (maxChar != '\0') {
+        cout << "Maximum occurring character: " << maxChar << endl;
+    } else {
+        cout << "The string is empty." << endl;
+    }
+
+    return 0;
+}
