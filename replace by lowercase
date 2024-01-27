@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+void toLowerCase(string& str) {
+    for (int i = 0; i < str.length(); ++i) {
+        str[i] = tolower(str[i]);
+    }
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    toLowerCase(inputString);
+
+    cout << "String in lowercase: " << inputString << endl;
+
+    return 0;
+}
