@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end of the linked list
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+// Function to find the middle element of a linked list
+struct Node* findMiddle(struct Node* head) {
+    if (head == NULL) {
+        return NULL;
+    }
+
+    struct Node* current = head;
+    int count = 0;
+
+    // Count the number of elements in the list
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+
+    // Reset current to the head of the list
+    current = head;
+
+    // Traverse to the middle element
+    for (int i = 0; i < count / 2; i++) {
+        current = current->next;
+    }
+
+    return current;
+}
+
+// Function to print the elements of a linked list
+void printList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct Node* myList = NULL;
+
+    // Populate the linked list
+    for (int i = 1; i <= 7; i++) {
+        insertNode(&myList, i);
+    }
+
+    printf("Original linked list: ");
+    printList(myList);
+
+    struct Node* middleNode = findMiddle(myList);
+
+    if (middleNode != NULL) {
+        printf("Middle element: %d\n", middleNode->data);
+    } else {
+        printf("The list is empty.\n");
+    }
+
+    return 0;
+}
+//in this the total number of elements are counted and the list is again traversed
