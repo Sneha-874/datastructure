@@ -1,0 +1,79 @@
+//copying a circular list
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+//creating circular linked list
+void create(struct node **ptr, int num) {
+    struct node *new_node;
+    new_node = (struct node*)malloc(sizeof(struct node));
+    new_node->data = num;
+    new_node->next = NULL;
+
+    if (*ptr == NULL) {
+        *ptr = new_node;
+        new_node->next = *ptr;
+    } else {
+        struct node *temp = *ptr;
+        while (temp->next != *ptr) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+        new_node->next=*ptr;
+    }
+}
+struct node * copyCircular(struct node *start) {
+    if(start==NULL){
+        return NULL;
+    }
+    else{
+        struct node *original = start;
+        struct node *copy = NULL;
+         do {
+        create(&copy, original->data);
+        original = original->next;
+    } while (original != start);
+
+    return copy;
+    }
+    
+    
+}
+
+void display(struct node *ptr){
+    struct node *temp = ptr;
+    do{
+        printf("%d\t" , temp->data);
+        temp=temp->next;
+    }while(temp!=ptr);
+    
+}
+int main()
+{
+    struct node *start = NULL; 
+    create(&start, 30);
+    create(&start, 60);
+    create(&start, 30);
+    create(&start, 90);
+    create(&start, 60);
+    create(&start, 300);
+    create(&start, 400);
+    create(&start, 30);
+    printf("Original linked list:-\n");
+    display(start);
+    struct node *ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    ptr = start;
+    struct node *copiedList = NULL;
+    printf("\nCopied list:-\n");
+    copiedList = copyCircular(start);
+    display(copiedList);
+        return 0;
+}
+Output:-
+Original linked list:-
+30      60      30      90      60      300     400     30
+Copied list:-
+30      60      30      90      60      300     400     30
