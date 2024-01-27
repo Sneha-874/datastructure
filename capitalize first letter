@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+void capitalizeFirstLetter(string& str) {
+    bool capitalizeNext = true;
+
+    for (int i = 0; i < str.length(); ++i) {
+        if (isspace(str[i])) {
+            capitalizeNext = true;
+        } else if (capitalizeNext) {
+            str[i] = toupper(str[i]);
+            capitalizeNext = false;
+        }
+    }
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    capitalizeFirstLetter(inputString);
+
+    cout << "New String: " << inputString << endl;
+
+    return 0;
+}
