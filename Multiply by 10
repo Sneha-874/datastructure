@@ -1,0 +1,64 @@
+//multiply each node data by 10
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void create(struct node **ptr, int num) {
+    struct node *new_node;
+    new_node = (struct node*)malloc(sizeof(struct node));
+    new_node->data = num;
+    new_node->next = NULL;
+
+    if (*ptr == NULL) {
+        *ptr = new_node;
+    } else {
+        struct node *temp = *ptr;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+    }
+}
+void multiply_10(struct node *start  ) {
+    struct node *current = start;
+    
+   while(current!=NULL){
+        current->data = (current->data)*10;
+        current = current->next;
+   }
+}
+
+void display(struct node *ptr){
+    while(ptr!=NULL){
+        printf("%d\t" , ptr->data);
+        ptr = ptr->next;
+    }
+}
+int main()
+{
+    struct node *start = NULL; 
+    create(&start, 1);
+    create(&start, 2);
+    create(&start, 3);
+    create(&start, 4);
+    create(&start, 5);
+    create(&start, 6);
+    create(&start, 7);
+    create(&start, 8);
+    printf("Original linked list:-\n");
+    display(start);
+    struct node *ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    ptr = start;
+    printf("\nLinked list after multiplication:-\n");
+    multiply_10(start);
+    display(start);
+        return 0;
+}
+Output:-
+Original linked list:-
+1       2       3       4       5       6     7  8
+Linked list after multiplication:-
+10      20      30      40      50      60    70 80
