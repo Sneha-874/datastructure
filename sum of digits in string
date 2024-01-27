@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+int sumOfDigits(const string& str) {
+    int sum = 0;
+
+    for (char ch : str) {
+        if (isdigit(ch)) {
+            sum += (ch - '0');
+        }
+    }
+
+    return sum;
+}
+
+int main() {
+    string inputString;
+    cout << "Enter a string: ";
+    getline(cin, inputString);
+
+    int digitSum = sumOfDigits(inputString);
+
+    cout << "Sum of every digit in the string: " << digitSum << endl;
+
+    return 0;
+}
